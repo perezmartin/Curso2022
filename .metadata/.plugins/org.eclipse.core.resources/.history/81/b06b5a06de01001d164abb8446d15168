@@ -1,0 +1,144 @@
+package es.rf.tienda.util;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class ValidatorTest {
+
+	@Test
+	void testIsAlfanumeric() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testIsVacio() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testIsVacioStrings() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumplePhoneNumber() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testIsEmailValido() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumpleDNI() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumpleRangoIntIntInt() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumpleRangoDoubleIntInt() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumpleLongitudMin() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumpleLongitudMax() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testCumpleLongitud() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testValDateMin() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testValDateMax() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testEsFechaValida() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testEsPasswordValida() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testObject() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testGetClass() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testHashCode() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testEquals() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testClone() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testToString() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testNotify() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testNotifyAll() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testWait() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testWaitLong() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testWaitLongInt() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	void testFinalize() {
+		fail("Not yet implemented");
+	}
+
+}

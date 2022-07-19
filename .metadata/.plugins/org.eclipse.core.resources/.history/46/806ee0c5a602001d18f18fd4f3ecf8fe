@@ -1,0 +1,48 @@
+package es.rf.tienda.vistas;
+
+import java.awt.BorderLayout;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class VistaCategoria {
+
+	public static void main(String[] args) {
+		JFrame app = new JFrame("VistaCategoria");
+		app.setSize(1000, 300);
+		app.setLocationRelativeTo(null);
+		JPanel panel = new JPanel();
+		BorderLayout layout = new BorderLayout();
+		
+		JButton botonEditar = new JButton("Editar");
+		JButton botonCancelar = new JButton("Cancelar");
+		
+		
+		JLabel cat_id = new JLabel("ID");
+		JLabel cat_nombre = new JLabel("Nombre");
+		JLabel cat_descripcion = new JLabel("Descripcin");
+		JTextField input_cat_id = new JTextField("getCategoriaID");
+		JTextField input_cat_nombre = new JTextField("getCategoriaNombre");
+		JTextField input_cat_descripcion = new JTextField("getCategoriaDescripcion");
+
+		
+		la
+		panel.add(cat_id);
+		panel.add(input_cat_id);
+		panel.add(cat_nombre);
+		panel.add(input_cat_nombre);
+		panel.add(cat_descripcion);
+		panel.add(input_cat_descripcion);
+
+		panel.add(botonEditar);
+		panel.add(botonCancelar);
+		
+		panel.add(layout);
+		app.add(panel);
+		app.setVisible(true);
+	}
+
+}

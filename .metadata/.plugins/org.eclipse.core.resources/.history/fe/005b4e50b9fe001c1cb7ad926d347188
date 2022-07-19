@@ -1,0 +1,32 @@
+package claseJava;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
+
+public class EjemploStreams {
+
+	
+	public static void main(String[] args) {
+		
+		
+		List<Integer> listaNumerosRandoms = new ArrayList<Integer>(Arrays.asList(crearNumeroRandom(50),crearNumeroRandom(50),crearNumeroRandom(50),crearNumeroRandom(50),crearNumeroRandom(50)));
+		 		
+		System.out.println("LISTA NUMERO------------------------------------");
+		listaNumerosRandoms.stream().forEach(System.out::println);
+		System.out.println("NUMERO MIN------------------------------------");
+		System.out.println( listaNumerosRandoms.stream().min(Comparator.naturalOrder()).get());
+		System.out.println("NUMERO MAX------------------------------------");
+		System.out.println( listaNumerosRandoms.stream().max(Comparator.naturalOrder()).get());
+		
+	}
+	public static int crearNumeroRandom(int max) {
+		Random r = new Random();
+		
+		int numero = r.nextInt(max)+1;
+		return numero;
+	}
+}

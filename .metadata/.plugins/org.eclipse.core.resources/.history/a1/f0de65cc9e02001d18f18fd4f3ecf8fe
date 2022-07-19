@@ -1,0 +1,37 @@
+package es.rf.tienda.vistas;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class VistaCategoria {
+	public static void main(String[] args) {
+		JFrame app = new JFrame("VistaCategoria");
+		app.setSize(300, 300);
+		app.setLocationRelativeTo(null);
+		JPanel panel = new JPanel();
+		
+		JButton botonAdd = new JButton("ROJO");
+		
+		
+		
+		botonAdd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				panel.setBackground(Color.RED);
+			}
+			
+		});
+				
+		
+		panel.add(botonAdd);
+		
+		app.add(panel);
+		app.setVisible(true);
+	}
+}

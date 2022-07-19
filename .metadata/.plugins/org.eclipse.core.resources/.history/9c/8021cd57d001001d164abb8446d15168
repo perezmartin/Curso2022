@@ -1,0 +1,43 @@
+package cursoJava;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Cliente {
+
+	public static void main(String[] args) {
+
+		final int PORT = 6000;
+		final String SERVER = "localhost";
+		final String MENSAJE = "Hola";
+
+		while (true) {
+			try {
+				Socket s = new Socket( SERVER,PORT );
+				
+				InputStream sIn = s.getInputStream();
+		        int c;
+				while( ( c = sIn.read() ) != -1 )
+		            System.out.print( (char)c );
+
+				sIn.close();
+				OutputStream s1out = s.getOutputStream();
+
+				int longCad = MENSAJE.length();
+				for (int i = 0; i < longCad; i++)
+					s1out.write((int) MENSAJE.charAt(i));
+				
+				s1out.close();
+				
+				s.close();
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+		}
+
+	}
+
+}

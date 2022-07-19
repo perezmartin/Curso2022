@@ -1,0 +1,39 @@
+package cursoJava;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Servidor {
+
+	public static void main(String[] args) {
+
+		final int PORT = 6000;
+		final String BIENVENIDA = "Bienvenido/a!";
+
+		while (true) {
+			try {
+				ServerSocket s = new ServerSocket(PORT);
+
+				Socket s1 = s.accept();
+				OutputStream s1out = s1.getOutputStream();
+
+				int longCad = BIENVENIDA.length();
+				for (int i = 0; i < longCad; i++)
+					s1out.write((int) BIENVENIDA.charAt(i));
+				InputStream s1in = s1.getInputStream();
+				s1in.read();
+				System.out.println(s1in);
+				s1in.close();
+				
+				s1.close();
+			} catch (IOException e) {
+				System.out.println(e);
+			}
+		}
+
+	}
+
+}

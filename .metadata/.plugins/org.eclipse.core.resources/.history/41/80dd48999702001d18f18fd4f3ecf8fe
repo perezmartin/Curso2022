@@ -1,0 +1,26 @@
+package cursoJava;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+public class Main {
+
+	public static void main(String[] args) {
+		JFrame app = new JFrame("app");
+		app.setSize(300, 300);
+		
+		JButton boton1 = new JButton();
+		JButton boton2 = new JButton();
+		JButton boton3 = new JButton();
+		JButton boton4 = new JButton();
+		
+		app.add(boton1);
+		app.add(boton2);
+		app.add(boton3);
+		app.add(boton4);
+		
+		app.setVisible(true);
+		
+	}
+}

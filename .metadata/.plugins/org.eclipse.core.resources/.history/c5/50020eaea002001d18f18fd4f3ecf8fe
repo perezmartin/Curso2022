@@ -1,0 +1,48 @@
+package es.rf.tienda.vistas;
+
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JList;
+import javax.swing.JPanel;
+
+import es.rf.tienda.dominio.Categoria;
+
+public class VistaCategoria {
+	public static void main(String[] args) {
+		JFrame app = new JFrame("VistaCategoria");
+		app.setSize(300, 300);
+		app.setLocationRelativeTo(null);
+		JPanel panel = new JPanel();
+		
+		JButton botonAdd = new JButton("Agregar");
+		
+		
+		
+		Categoria cat1 = new Categoria(0,"categoria 1","esta es la categoria 1");
+		Categoria cat2 = new Categoria(1,"categoria 2","esta es la categoria 2");
+		Categoria cat3 = new Categoria(2,"categoria 3","esta es la categoria 3");
+		Categoria[] data= {cat1,cat2,cat3};		
+		JList listaCategorias = new JList<Categoria>(data);
+		
+		listaCategorias.add(cat1);
+		
+		botonAdd.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+			
+		});
+				
+		
+		panel.add(botonAdd);
+		
+		app.add(panel);
+		app.setVisible(true);
+	}
+}
