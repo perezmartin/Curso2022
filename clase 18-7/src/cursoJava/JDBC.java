@@ -39,6 +39,7 @@ public class JDBC {
 
 		try {
 			conn = DriverManager.getConnection(URL, USUARIO, PASSWORD);
+			conn.setAutoCommit(false);
 			System.out.println("conectado!");
 		} catch (SQLException e) {
 			e.printStackTrace();

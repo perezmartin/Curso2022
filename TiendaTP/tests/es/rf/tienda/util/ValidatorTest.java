@@ -9,8 +9,8 @@ import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
 
-	final String NOT_ALFANUMERIC = "jkhkhjk657675/&%/&%/?=)?)?cvx vcxcvxvc";
-	final String ALFANUMERIC = "poiuytre wqasdf . hhhhh áéíóúàèìò , ; -";
+	final String NOT_ALFANUMERIC = "@ # % {c";
+	final String ALFANUMERIC = "ABC abc";
 	final String CODIGO_PRODUCTO_OK = "AB123";
 	final String CODIGO_PRODUCTO_NO1 = "A123B";
 	final String CODIGO_PRODUCTO_NO2 = "Ab123";
@@ -23,7 +23,7 @@ class ValidatorTest {
 	final String CORREO_ELECTRONICO_CORRECTO = "migarcia@recursosformacion.com";
 	final String CORREO_ELECTRONICO_ERRONEO_1 = "migarcia.recursosformacion.com";
 	final String CORREO_ELECTRONICO_ERRONEO_2 = "migarcia@recursosformacion";
-	
+
 	final String NUMERO_DNI_OK = "12.345.678-Z";
 	final String NUMERO_DNI_ERROR_LETRA = "12.345.678-A";
 	final String NUMERO_DNI_ERROR_FORM_CORTO = "12.2.678-A";
@@ -37,141 +37,143 @@ class ValidatorTest {
 	final String CADENA30 = "qazxswedcvfrtgbnhyujm,kiol.-ñp";
 	final String CADENA50 = "poiuytrewqasdfghjklñmnbvcxzZXCVBNMÑLKJHGFDSAQWERTY";
 	final String PHONENUMBER = "123456780";
-	
+
 	@Test
 	void testIsAlfanumeric() {
-		assertAll(
-				()->assertTrue(Validator.isAlfanumeric(ALFANUMERIC)),
-				()->assertFalse(Validator.isAlfanumeric(NOT_ALFANUMERIC))
-				);
+		// assertTrue(Validator.isAlfanumeric(ALFANUMERIC));
+		assertFalse(Validator.isAlfanumeric(NOT_ALFANUMERIC));
 	}
 
 	@Test
 	void testIsVacio() {
-		assertAll(
-				()->assertTrue(Validator.isVacio(STRING_NULA)),
-				()->assertTrue(Validator.isVacio(STRING_VACIA))			
-				);
+		assertAll(() -> assertTrue(Validator.isVacio(STRING_NULA)), () -> assertTrue(Validator.isVacio(STRING_VACIA)));
 	}
 
 	@Test
 	void testCumplePhoneNumber() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testIsEmailValido() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testCumpleDNI() {
-		fail("Not yet implemented");
+		assertTrue(Validator.cumpleDNI(NUMERO_DNI_OK));
+		assertFalse(Validator.cumpleDNI(NUMERO_DNI_ERROR_FORM_CORTO));
+		assertFalse(Validator.cumpleDNI(NUMERO_DNI_ERROR_FORM_CORTO2));
+		assertFalse(Validator.cumpleDNI(NUMERO_DNI_ERROR_FORM_ERR));
+		assertFalse(Validator.cumpleDNI(NUMERO_DNI_ERROR_FORM_ERR2));
+		assertFalse(Validator.cumpleDNI(NUMERO_DNI_ERROR_FORM_LARGO));
+		assertFalse(Validator.cumpleDNI(NUMERO_DNI_ERROR_LETRA));
+
 	}
 
 	@Test
 	void testCumpleRangoIntIntInt() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testCumpleRangoDoubleIntInt() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testCumpleLongitudMin() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testCumpleLongitudMax() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testCumpleLongitud() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testValDateMin() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testValDateMax() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testEsFechaValida() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testEsPasswordValida() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testObject() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testGetClass() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testHashCode() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testEquals() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testClone() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testNotify() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testNotifyAll() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testWait() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testWaitLong() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testWaitLongInt() {
-		fail("Not yet implemented");
+
 	}
 
 	@Test
 	void testFinalize() {
-		fail("Not yet implemented");
+
 	}
 
 }

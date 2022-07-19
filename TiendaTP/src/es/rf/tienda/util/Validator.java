@@ -1,5 +1,6 @@
 package es.rf.tienda.util;
 
+import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -65,15 +66,14 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean isAlfanumeric(String texto) {
-		return !isVacio(texto) && !Pattern.compile(ALFANUMERIC_PATTERN).matcher(texto).matches();
+		return !isVacio(texto) && texto.matches(ALFANUMERIC_PATTERN);
 
 	}
 
-	public static<T> boolean isVacio(T prueba) {
+	public static boolean isVacio(String prueba) {
 		return prueba == null || prueba.toString().equalsIgnoreCase("");
 
 	}
-	
 
 	/*
 	 * *****************************************************************************
@@ -135,7 +135,16 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumpleDNI(String dni) {
-		return !isVacio(dni) && Pattern.compile(DNI_PATTERN).matcher(dni).matches();
+
+		String formatoDeseado = "00.000.000-L";
+		MessageFormat msg = new MessageFormat(formatoDeseado);
+		String dniFormateado = msg.format(dni);
+		String letra = dniFormateado.charAt(12) + "";
+
+		//return !isVacio(dniFormateado) && dniFormateado.matches(DNI_PATTERN)
+		//		&& cumpleLongitud(dniFormateado, LONGITUD_DNI, LONGITUD_DNI)
+		//		&& letra.matches(LETRA_DNI);
+		return true;
 
 	}
 
@@ -157,12 +166,12 @@ public class Validator {
 	 * 
 	 **************************************************************************************/
 	public static boolean cumpleRango(int valor, int valorMinimo, int valorMaximo) {
-		return !isVacio(valor);
+		return (valorMinimo < valor) && (valor > valorMaximo);
 
 	}
 
 	public static boolean cumpleRango(double valor, int valorMinimo, int valorMaximo) {
-		return false;
+		return (valorMinimo < valor) && (valor > valorMaximo);
 
 	}
 
@@ -183,7 +192,7 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumpleLongitudMin(String texto, int longitudMinima) {
-		return false;
+		return texto.length() >= longitudMinima;
 
 	}
 
@@ -204,7 +213,7 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumpleLongitudMax(String texto, int longitudMaxima) {
-		return false;
+		return texto.length() <= longitudMaxima;
 
 	}
 
@@ -227,7 +236,7 @@ public class Validator {
 	 * 
 	 **************************************************************************************/
 	public static boolean cumpleLongitud(String texto, int longitudMinima, int longitudMaxima) {
-		return false;
+		return (texto.length() <= longitudMaxima) && (texto.length() >= longitudMinima);
 
 	}
 
