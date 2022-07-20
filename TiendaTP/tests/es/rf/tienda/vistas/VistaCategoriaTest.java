@@ -10,6 +10,7 @@ public class VistaCategoriaTest {
 		
 		VistaCategoria v2 = new VistaCategoria();
 		Categoria cat1 = new Categoria(0,"cat1","esta es una categoria");
+		v2.setCategoria(cat1);
 		
 		v2.iniciarVista();
 	}

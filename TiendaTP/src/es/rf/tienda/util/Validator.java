@@ -1,17 +1,15 @@
 package es.rf.tienda.util;
 
-import java.text.MessageFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /********************************************************************************************
  * NOMBRE: Validator.java
  * 
  * DESCRIPCION: Clase auxiliar para validar los datos que sean introducidos en
- * la aplicacián.
+ * la aplicaciï¿½n.
  * 
  * @version 30/01/2016
  * @author Miguel Garcia
@@ -23,29 +21,29 @@ public class Validator {
 
 	private static final String PASSWORD_PATTERN = "((?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%]).{6,20})";
 	/**
-	 * Patrón para validar el email, evitando puntos finales antes de la @ y que
-	 * solo contenga carácteres alfanumáricos
+	 * Patrï¿½n para validar el email, evitando puntos finales antes de la @ y que
+	 * solo contenga carï¿½cteres alfanumï¿½ricos
 	 */
 	private final static String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	/**
-	 * Permite verificar que un DNI cumple con el patrán XX.XXX.XXX-L
+	 * Permite verificar que un DNI cumple con el patrï¿½n XX.XXX.XXX-L
 	 */
-	private final static String DNI_PATTERN = "\\d{2}\\.\\d{3}\\.\\d{3}-[a-zA-Z]";
+	private final static String DNI_PATTERN = "\\d{2}\\.\\d{3}\\.\\d{3}-[TRWAGMYFPDXBNJZSQVHLCKE]";
 
 	/**
-	 * Permite validar un teláfono, el cual debe contener de 10 a 20 dágitos y donde
-	 * los espacios están permitidos
+	 * Permite validar un telï¿½fono, el cual debe contener de 10 a 20 dï¿½gitos y donde
+	 * los espacios estï¿½n permitidos
 	 */
 	private final static String PHONE_PATTERN = "[\\d ]{10,20}";
 
 	/**
-	 * Orden de las letras con las cuales se comprobará la validez del DNI
+	 * Orden de las letras con las cuales se comprobarï¿½ la validez del DNI
 	 */
 	private final static String LETRA_DNI = "TRWAGMYFPDXBNJZSQVHLCKE";
 
 	/**
-	 * Longitud que debe tener todo DNI pasado a la aplicacián.
+	 * Longitud que debe tener todo DNI pasado a la aplicaciï¿½n.
 	 */
 	private final static int LONGITUD_DNI = 12;
 
@@ -53,13 +51,13 @@ public class Validator {
 	 * *****************************************************************************
 	 * ********** NOMBRE: isAlfanumeric *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 *//**
-		 * Permite verificar que el texto pasado solo contiene caracters alfanumáricos
+		 * Permite verificar que el texto pasado solo contiene caracters alfanumï¿½ricos
 		 * 
-		 * @param texto String a verificar que solo tenga carácteres alfanumáricos
+		 * @param texto String a verificar que solo tenga carï¿½cteres alfanumï¿½ricos
 		 * 
-		 * @return true, si cumple solo contiene caracters alfanumáricos. <br>
+		 * @return true, si cumple solo contiene caracters alfanumï¿½ricos. <br>
 		 *         false en caso contrario FECHA: Enero 2016
 		 * 
 		 *         AUTOR: Miguel Garcia - Barcelona
@@ -71,7 +69,7 @@ public class Validator {
 	}
 
 	public static boolean isVacio(String prueba) {
-		return prueba == null || prueba.toString().equalsIgnoreCase("");
+		return prueba == null || prueba.equalsIgnoreCase("");
 
 	}
 
@@ -79,14 +77,14 @@ public class Validator {
 	 * *****************************************************************************
 	 * ********** NOMBRE: cumplePhoneNumber *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 *//**
-		 * El phone number debe tener un total de entre 10 y 20, contando dágitos y
-		 * espacios. Mánimo aceptable son 10 dágitos.
+		 * El phone number debe tener un total de entre 10 y 20, contando dï¿½gitos y
+		 * espacios. Mï¿½nimo aceptable son 10 dï¿½gitos.
 		 * 
-		 * @param phoneNumber String con el námero de telefono de entre 10 y 20 dágitos.
-		 *                    Puede tener espacios, pero siempre con 10 dágitos como
-		 *                    mánimo.
+		 * @param phoneNumber String con el nï¿½mero de telefono de entre 10 y 20 dï¿½gitos.
+		 *                    Puede tener espacios, pero siempre con 10 dï¿½gitos como
+		 *                    mï¿½nimo.
 		 * 
 		 * @return true, si cumple todas las condiciones
 		 *
@@ -94,7 +92,8 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumplePhoneNumber(String phoneNumber) {
-		return !isVacio(phoneNumber) && Pattern.compile(PHONE_PATTERN).matcher(phoneNumber).matches();
+		return !isVacio(phoneNumber) 				
+				&& phoneNumber.matches(PHONE_PATTERN);
 
 	}
 
@@ -102,29 +101,29 @@ public class Validator {
 	 * *****************************************************************************
 	 * ********** NOMBRE: isEmailValido *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 *//**
-		 * Comprueba si el email tiene un formato que pueda ser válido.
+		 * Comprueba si el email tiene un formato que pueda ser vï¿½lido.
 		 * 
 		 * @param email String a comprobar
 		 * 
-		 * @return true, en caso que el formato sea válido FECHA: Enero 2016
+		 * @return true, en caso que el formato sea vï¿½lido FECHA: Enero 2016
 		 * 
 		 *         AUTOR: Miguel Garcia
 		 * 
 		 **************************************************************************************/
 	public static boolean isEmailValido(String email) {
-		return !isVacio(email) && Pattern.compile(EMAIL_PATTERN).matcher(email).matches();
-
+		return !isVacio(email) 
+				&& email.matches(EMAIL_PATTERN); 
 	}
 
 	/*
 	 * *****************************************************************************
 	 * ********** NOMBRE: cumpleDNI *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 *//**
-		 * Esta función verifica que el DNI cumple el siguiente formato: xx.xxx.xxx-L
+		 * Esta funciï¿½n verifica que el DNI cumple el siguiente formato: xx.xxx.xxx-L
 		 * <br>
 		 * El DNI ha de tener longitud 12
 		 * 
@@ -135,31 +134,23 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumpleDNI(String dni) {
-
-		String formatoDeseado = "00.000.000-L";
-		MessageFormat msg = new MessageFormat(formatoDeseado);
-		String dniFormateado = msg.format(dni);
-		String letra = dniFormateado.charAt(12) + "";
-
-		//return !isVacio(dniFormateado) && dniFormateado.matches(DNI_PATTERN)
-		//		&& cumpleLongitud(dniFormateado, LONGITUD_DNI, LONGITUD_DNI)
-		//		&& letra.matches(LETRA_DNI);
-		return true;
-
+		return !isVacio(dni) 
+				&& dni.matches(DNI_PATTERN) 
+				&& cumpleLongitud(dni, LONGITUD_DNI, LONGITUD_DNI);
 	}
 
 	/**
 	 * ***************************************************************************************
 	 * NOMBRE: cumpleRango *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 */
 	/**
-	 * Comprueba que un Número se necuentra entre 2 valores
+	 * Comprueba que un Nï¿½mero se necuentra entre 2 valores
 	 * 
-	 * @param valor       (int)/(double) Número a comprobar
-	 * @param valorMinimo (int) Número valor aceptable
-	 * @param valorMaximo (int) MáNúmero valor aceptable
+	 * @param valor       (int)/(double) Nï¿½mero a comprobar
+	 * @param valorMinimo (int) Nï¿½mero valor aceptable
+	 * @param valorMaximo (int) Mï¿½Nï¿½mero valor aceptable
 	 * 
 	 * @return true si valorMinimo > valor > valorMaximo FECHA: Enero 2016 AUTOR:
 	 *         Miguel Garcia
@@ -179,13 +170,13 @@ public class Validator {
 	 * *****************************************************************************
 	 * ********** NOMBRE: cumpleLongitudMin *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 *//**
 		 * Comprobar que el texto pasado tiene una longitud de al menos x caracteres,
-		 * siendo x el entero pasado como parámetro
+		 * siendo x el entero pasado como parï¿½metro
 		 * 
 		 * @param texto          String texto a comprobar
-		 * @param longitudMinima int que indique longitud mánima.
+		 * @param longitudMinima int que indique longitud mï¿½nima.
 		 * 
 		 * @return cierto, si la longitud del texto es mayor o igual que longitudMinima
 		 *         FECHA: Enero 2016 AUTOR: Miguel Garcia
@@ -200,15 +191,15 @@ public class Validator {
 	 * *****************************************************************************
 	 * ********** NOMBRE: cumpleLongitudMax *
 	 * 
-	 * DESCRIPCIáN:
+	 * DESCRIPCIï¿½N:
 	 *//**
 		 * Comprobar que el texto pasado tiene una longitud de, como mucho, x
-		 * caracteres, siendo x el entero pasado como parámetro
+		 * caracteres, siendo x el entero pasado como parï¿½metro
 		 * 
 		 * @param texto          String con el texto a comprobar
-		 * @param longitudMaxima int con la longitud máxima del texto
+		 * @param longitudMaxima int con la longitud mï¿½xima del texto
 		 * 
-		 * @return true, si el texto es menor o igual que la longitud máxima. FECHA:
+		 * @return true, si el texto es menor o igual que la longitud mï¿½xima. FECHA:
 		 *         Enero 2016 AUTOR: Miguel Garcia
 		 * 
 		 **************************************************************************************/
@@ -220,15 +211,15 @@ public class Validator {
 	/****************************************************************************************
 	 * NOMBRE: cumpleLongitud *
 	 * 
-	 * DESCRIPCIÓN:
+	 * DESCRIPCIï¿½N:
 	 */
 	/**
-	 * Comprobar que la longitud de un texto se encuentra entre unos valores máximos
-	 * y mánimos
+	 * Comprobar que la longitud de un texto se encuentra entre unos valores mï¿½ximos
+	 * y mï¿½nimos
 	 * 
 	 * @param texto          String con el texto que a validar
-	 * @param longitudMinima (int) Mínima longitud del texto
-	 * @param longitudMaxima (int) Máxima longitud válida para el texo
+	 * @param longitudMinima (int) Mï¿½nima longitud del texto
+	 * @param longitudMaxima (int) Mï¿½xima longitud vï¿½lida para el texo
 	 * 
 	 * @return true, si la longitud del texto cumple: longitudMinima <=
 	 *         longitudTexto <=longitudMaxima FECHA: Enero 2016 AUTOR: Miguel Garcia
@@ -241,7 +232,7 @@ public class Validator {
 	}
 
 	/**
-	 * Valida una fecha calendar con mínimo min
+	 * Valida una fecha calendar con mï¿½nimo min
 	 * 
 	 * @param fecha
 	 * @param min
@@ -253,7 +244,7 @@ public class Validator {
 	}
 
 	/**
-	 * Valida una fecha calendar con máximo max
+	 * Valida una fecha calendar con mï¿½ximo max
 	 * 
 	 * @param fecha
 	 * @param max
@@ -280,19 +271,20 @@ public class Validator {
 		} catch (ParseException e) {
 			return false;
 		}
-		return !isVacio(fecha) && fecha.compareTo(dateFormat.format(cal.getTime().toString())) == 0;
+		return !isVacio(fecha) 
+				&& fecha.compareTo(dateFormat.format(cal.getTime().toString())) == 0;
 
 	}
 
 	/**
 	 * Nombre esPasswordValida Descripcion Comprueba que la cadena recibida cumpla
-	 * con lasnormas de contraseña
+	 * con lasnormas de contraseï¿½a
 	 * 
-	 * @param password string con la contraseña introducida
+	 * @param password string con la contraseï¿½a introducida
 	 * @return true si cumple con las especificaciones
 	 */
 	public static boolean esPasswordValida(String password) {
-		return !isVacio(password) && Pattern.compile(PASSWORD_PATTERN).matcher(password).matches();
+		return !isVacio(password) && password.matches(PASSWORD_PATTERN);
 
 	}
 }
