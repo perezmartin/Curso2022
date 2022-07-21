@@ -22,8 +22,6 @@ public class VistaCategoria extends JFrame {
 	private Categoria categoria;
 
 	public void iniciarVista() {
-		// estos componentes irian en el constructor pero si los pongo ahi no se
-		// muestran los corazones
 		initComponents(); // inicio los componentes
 		setLocationRelativeTo(null); // centro la VistaSwing a la pantalla
 		setVisible(true); // hago visible la VistaSwing

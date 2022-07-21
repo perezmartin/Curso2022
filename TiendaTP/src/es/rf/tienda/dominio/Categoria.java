@@ -22,7 +22,7 @@ public class Categoria {
 		this.setId_categoria(id);
 		this.setCat_nombre(nombre);
 		this.setCat_descripcion(descripcion);
-		
+
 	}
 
 	public boolean isValid() {
@@ -116,8 +116,7 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return "Categoria [id_categoria=" + id_categoria + ", cat_nombre=" + cat_nombre + ", cat_descripcion="
-				+ cat_descripcion + "]";
+		return id_categoria + " " + cat_nombre;
 	}
 
 }

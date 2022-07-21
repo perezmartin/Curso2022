@@ -47,7 +47,7 @@ class ValidatorTest {
 	final String CADENA1 = "a";
 	final String CADENA5 = "Ansde";
 	final String CADENA20 = "asmdjfoeirksndvieqaz";
-	final String CADENA30 = "qazxswedcvfrbnhyujm,kiol.-�p";
+	final String CADENA30 = "qazxswedcvfrbnhyujm,kiol.-pasd";
 	final String CADENA50 = "poiuytrsdfghjkl�mnbvcxzZXCVBNM�LKJHGFDSAQWERTY";
 
 	final String PHONENUMBER_OK = "1134567890";
@@ -67,6 +67,9 @@ class ValidatorTest {
 	final Calendar AHORA = Calendar.getInstance();
 
 	final String CONTRASENIA_OK = "qasLOASD#~@1!!!";
+	final String CONTRASENIA_ERROR = "12345";
+	final String CONTRASENIA_ERROR_1 = "123456789123456789123456789";
+	final String CONTRASENIA_ERROR_2 = "}}¬¬¬||SD";
 
 	@Test
 	void testIsAlfanumeric() {
@@ -219,5 +222,8 @@ class ValidatorTest {
 	@Test
 	void testEsPasswordValida() {
 		assertTrue(Validator.esPasswordValida(CONTRASENIA_OK));
+		assertFalse(Validator.esPasswordValida(CONTRASENIA_ERROR));
+		assertFalse(Validator.esPasswordValida(CONTRASENIA_ERROR_1));
+		assertFalse(Validator.esPasswordValida(CONTRASENIA_ERROR_2));
 	}
 }
