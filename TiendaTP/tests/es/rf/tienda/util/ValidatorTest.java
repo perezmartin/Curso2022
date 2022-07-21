@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import org.junit.jupiter.api.Test;
 
@@ -64,6 +65,8 @@ class ValidatorTest {
 	final String FECHA_ERROR_1 = "2022/2/22";
 	final String FECHA_ERROR_2 = "31/2/2022";
 	final String FECHA_ERROR_3 = "2/9993/9";
+
+	final Calendar AHORA = Calendar.getInstance();
 
 	final String CONTRASEÑA_OK = "qasLOASD#~@1!!!";
 
@@ -169,16 +172,38 @@ class ValidatorTest {
 
 	@Test
 	void testValDateMin() {
-		assertTrue(Validator.valDateMin(FECHA_OK_1, FECHA_OK));
-		assertTrue(Validator.valDateMin(FECHA_OK_3, FECHA_OK));
-		assertTrue(Validator.valDateMin(FECHA_OK_2, FECHA_OK));
+
+		Calendar mañana = Calendar.getInstance();
+		mañana.add(Calendar.DAY_OF_MONTH, 1);
+		Calendar ayer = Calendar.getInstance();
+		ayer.add(Calendar.DAY_OF_MONTH, -2);
+
+		assertTrue(Validator.valDateMin(AHORA, AHORA));
+		assertTrue(Validator.valDateMin(mañana, AHORA));
+		assertTrue(Validator.valDateMin(AHORA, ayer));
+		assertTrue(Validator.valDateMin(mañana, ayer));
+		
+		assertFalse(Validator.valDateMin(AHORA, mañana));
+		assertFalse(Validator.valDateMin(ayer, AHORA));
+		assertFalse(Validator.valDateMin(ayer, mañana));
 	}
 
 	@Test
 	void testValDateMax() {
-		assertTrue(Validator.valDateMax(FECHA_OK_1, FECHA_OK));
-		assertTrue(Validator.valDateMax(FECHA_OK_2, FECHA_OK));
-		assertTrue(Validator.valDateMax(FECHA_OK_3, FECHA_OK));
+
+		Calendar mañana = Calendar.getInstance();
+		mañana.add(Calendar.DAY_OF_MONTH, 1);
+		Calendar ayer = Calendar.getInstance();
+		ayer.add(Calendar.DAY_OF_MONTH, -2);
+
+		assertTrue(Validator.valDateMax(AHORA, AHORA));
+		assertTrue(Validator.valDateMax(ayer, mañana));
+		assertTrue(Validator.valDateMax(AHORA, mañana));
+		assertTrue(Validator.valDateMax(ayer, AHORA));
+
+		assertFalse(Validator.valDateMax(mañana, AHORA));
+		assertFalse(Validator.valDateMax(AHORA, ayer));
+		assertFalse(Validator.valDateMax(mañana, ayer));
 	}
 
 	@Test

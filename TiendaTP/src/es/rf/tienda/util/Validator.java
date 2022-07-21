@@ -3,8 +3,6 @@ package es.rf.tienda.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.regex.Pattern;
 
 /********************************************************************************************
  * NOMBRE: Validator.java
@@ -237,26 +235,14 @@ public class Validator {
 	 * @return
 	 */
 
-	
-	public static boolean valDateMin(String fecha, String min) {
-		
-		if(esFechaValida(fecha) && esFechaValida(min)) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	        
-			try {
-				Date date = new Date(sdf.parse(fecha).getTime());
-				Date dateMin = new Date(sdf.parse(min).getTime());
-				
-				return dateMin.before(date);
-			} catch (ParseException e) {
-				return false;
-			}
-	        
-		}else {
-			return false;
+	public static boolean valDateMin(Calendar fecha, Calendar min) {
+
+		if (fecha != null && min != null) {
+			
+			return fecha.compareTo(min) >= 0;
+
 		}
-		
-		
+		return false;
 	}
 
 	/**
@@ -266,26 +252,14 @@ public class Validator {
 	 * @param max
 	 * @return
 	 */
-	public static boolean valDateMax(String fecha, String max) {
-		
-		if(esFechaValida(fecha) && esFechaValida(max)) {
-			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-	        
-			try {
-				Date date = new Date(sdf.parse(fecha).getTime());
-				Date dateMax = new Date(sdf.parse(max).getTime());
-				
-				return date.before(dateMax);
-				
-			} catch (ParseException e) {
-				e.printStackTrace();
-				return false;
-			}
-	        
-		}else {
-			return false;
-		}		
+	public static boolean valDateMax(Calendar fecha, Calendar max) {
 
+		if (fecha != null && max != null) {
+
+			return fecha.compareTo(max) <= 0;
+
+		}
+		return false;
 	}
 
 	/**
