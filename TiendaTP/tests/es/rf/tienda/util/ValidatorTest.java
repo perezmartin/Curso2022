@@ -3,12 +3,10 @@ package es.rf.tienda.util;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.fail;
-
-import java.util.Calendar;
-import java.util.Date;
 
 import org.junit.jupiter.api.Test;
+
+import java.util.Calendar;
 
 class ValidatorTest {
 
@@ -68,7 +66,7 @@ class ValidatorTest {
 
 	final Calendar AHORA = Calendar.getInstance();
 
-	final String CONTRASEÑA_OK = "qasLOASD#~@1!!!";
+	final String CONTRASENIA_OK = "qasLOASD#~@1!!!";
 
 	@Test
 	void testIsAlfanumeric() {
@@ -173,37 +171,37 @@ class ValidatorTest {
 	@Test
 	void testValDateMin() {
 
-		Calendar mañana = Calendar.getInstance();
-		mañana.add(Calendar.DAY_OF_MONTH, 1);
+		Calendar maniana = Calendar.getInstance();
+		maniana.add(Calendar.DAY_OF_MONTH, 1);
 		Calendar ayer = Calendar.getInstance();
 		ayer.add(Calendar.DAY_OF_MONTH, -2);
 
 		assertTrue(Validator.valDateMin(AHORA, AHORA));
-		assertTrue(Validator.valDateMin(mañana, AHORA));
+		assertTrue(Validator.valDateMin(maniana, AHORA));
 		assertTrue(Validator.valDateMin(AHORA, ayer));
-		assertTrue(Validator.valDateMin(mañana, ayer));
-		
-		assertFalse(Validator.valDateMin(AHORA, mañana));
+		assertTrue(Validator.valDateMin(maniana, ayer));
+
+		assertFalse(Validator.valDateMin(AHORA, maniana));
 		assertFalse(Validator.valDateMin(ayer, AHORA));
-		assertFalse(Validator.valDateMin(ayer, mañana));
+		assertFalse(Validator.valDateMin(ayer, maniana));
 	}
 
 	@Test
 	void testValDateMax() {
 
-		Calendar mañana = Calendar.getInstance();
-		mañana.add(Calendar.DAY_OF_MONTH, 1);
+		Calendar maniana = Calendar.getInstance();
+		maniana.add(Calendar.DAY_OF_MONTH, 1);
 		Calendar ayer = Calendar.getInstance();
 		ayer.add(Calendar.DAY_OF_MONTH, -2);
 
 		assertTrue(Validator.valDateMax(AHORA, AHORA));
-		assertTrue(Validator.valDateMax(ayer, mañana));
-		assertTrue(Validator.valDateMax(AHORA, mañana));
+		assertTrue(Validator.valDateMax(ayer, maniana));
+		assertTrue(Validator.valDateMax(AHORA, maniana));
 		assertTrue(Validator.valDateMax(ayer, AHORA));
 
-		assertFalse(Validator.valDateMax(mañana, AHORA));
+		assertFalse(Validator.valDateMax(maniana, AHORA));
 		assertFalse(Validator.valDateMax(AHORA, ayer));
-		assertFalse(Validator.valDateMax(mañana, ayer));
+		assertFalse(Validator.valDateMax(maniana, ayer));
 	}
 
 	@Test
@@ -220,6 +218,6 @@ class ValidatorTest {
 
 	@Test
 	void testEsPasswordValida() {
-		assertTrue(Validator.esPasswordValida(CONTRASEÑA_OK));
+		assertTrue(Validator.esPasswordValida(CONTRASENIA_OK));
 	}
 }
