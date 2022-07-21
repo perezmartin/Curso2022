@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.util.Calendar;
+
 import org.junit.jupiter.api.Test;
 
 class ValidatorTest {
@@ -38,17 +40,32 @@ class ValidatorTest {
 	final int NUMERO_INT = 0;
 	final int NUMERO_INT_NEGATIVO = -90000000;
 	final int NUMERO_INT_POSITIVO = 800000000;
-	
-	
+
+	final double NUMERO_DOUBLE = 0.0;
+	final double NUMERO_DOUBLE_NEGATIVO = -1764.8889;
+	final double NUMERO_DOUBLE_POSITIVO = 86594.6442;
+
 	final String CADENA1 = "a";
 	final String CADENA5 = "Ansde";
 	final String CADENA20 = "asmdjfoeirksndvieqaz";
-	final String CADENA30 = "qazxswedcvfrtgbnhyujm,kiol.-ï¿½p";
-	final String CADENA50 = "poiuytrewqasdfghjklï¿½mnbvcxzZXCVBNMï¿½LKJHGFDSAQWERTY";
+	final String CADENA30 = "qazxswedcvfrbnhyujm,kiol.-ï¿½p";
+	final String CADENA50 = "poiuytrsdfghjklï¿½mnbvcxzZXCVBNMï¿½LKJHGFDSAQWERTY";
 
 	final String PHONENUMBER_OK = "1134567890";
 	final String PHONENUMBER_ERROR_FORM_CORTO = "11345";
 	final String PHONENUMBER_ERROR_FORM_LARGO = "145454487524575147874517811345";
+
+	final String FECHA_OK = "01/07/2022";
+	final String FECHA_OK_1 = "26/12/9999";
+	final String FECHA_OK_2 = "8/1/22";
+	final String FECHA_OK_3 = "9/5/1";
+
+	final String FECHA_ERROR = "2/30/2022";
+	final String FECHA_ERROR_1 = "2022/2/22";
+	final String FECHA_ERROR_2 = "31/2/2022";
+	final String FECHA_ERROR_3 = "2/9993/9";
+
+	final String CONTRASEÑA_OK = "qasLOASD#~@1!!!";
 
 	@Test
 	void testIsAlfanumeric() {
@@ -58,9 +75,7 @@ class ValidatorTest {
 
 	@Test
 	void testIsVacio() {
-		assertAll(() -> assertTrue(Validator.isVacio(STRING_NULA)), 
-				() -> assertTrue(Validator.isVacio(STRING_VACIA))
-				);
+		assertAll(() -> assertTrue(Validator.isVacio(STRING_NULA)), () -> assertTrue(Validator.isVacio(STRING_VACIA)));
 	}
 
 	@Test
@@ -90,46 +105,96 @@ class ValidatorTest {
 
 	@Test
 	void testCumpleRangoIntIntInt() {
-		assertTrue(Validator.cumpleRango(NUMERO_INT, NUMERO_INT, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_INT, NUMERO_INT, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_INT_POSITIVO, NUMERO_INT_NEGATIVO, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_INT_POSITIVO, NUMERO_INT, NUMERO_INT_NEGATIVO));
+		assertFalse(Validator.cumpleRango(NUMERO_INT_NEGATIVO, NUMERO_INT_POSITIVO, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_INT_NEGATIVO, NUMERO_INT, NUMERO_INT_POSITIVO));
+		assertTrue(Validator.cumpleRango(NUMERO_INT, NUMERO_INT_NEGATIVO, NUMERO_INT_POSITIVO));
 	}
 
 	@Test
 	void testCumpleRangoDoubleIntInt() {
 
+		assertFalse(Validator.cumpleRango(NUMERO_DOUBLE_NEGATIVO, NUMERO_INT, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_DOUBLE_POSITIVO, NUMERO_INT_NEGATIVO, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_DOUBLE, NUMERO_INT, NUMERO_INT_NEGATIVO));
+		assertFalse(Validator.cumpleRango(NUMERO_DOUBLE_NEGATIVO, NUMERO_INT_POSITIVO, NUMERO_INT));
+		assertFalse(Validator.cumpleRango(NUMERO_DOUBLE_NEGATIVO, NUMERO_INT, NUMERO_INT_POSITIVO));
+		assertTrue(Validator.cumpleRango(NUMERO_DOUBLE, NUMERO_INT_NEGATIVO, NUMERO_INT_POSITIVO));
 	}
 
 	@Test
 	void testCumpleLongitudMin() {
 
+		assertTrue(Validator.cumpleLongitudMin(CADENA1, 1));
+		assertTrue(Validator.cumpleLongitudMin(CADENA20, 20));
+		assertTrue(Validator.cumpleLongitudMin(CADENA30, 24));
+		assertTrue(Validator.cumpleLongitudMin(CADENA5, 2));
+		assertTrue(Validator.cumpleLongitudMin(CADENA50, 40));
+		assertFalse(Validator.cumpleLongitudMin(CADENA1, 3));
+		assertFalse(Validator.cumpleLongitudMin(CADENA20, 40));
+		assertFalse(Validator.cumpleLongitudMin(CADENA30, 32));
+		assertFalse(Validator.cumpleLongitudMin(CADENA5, 9));
+		assertFalse(Validator.cumpleLongitudMin(CADENA50, 100));
 	}
 
 	@Test
 	void testCumpleLongitudMax() {
-
+		assertTrue(Validator.cumpleLongitudMax(CADENA1, 1));
+		assertTrue(Validator.cumpleLongitudMax(CADENA20, 20));
+		assertTrue(Validator.cumpleLongitudMax(CADENA30, 50));
+		assertTrue(Validator.cumpleLongitudMax(CADENA5, 50));
+		assertTrue(Validator.cumpleLongitudMax(CADENA50, 100));
+		assertFalse(Validator.cumpleLongitudMax(CADENA1, 0));
+		assertFalse(Validator.cumpleLongitudMax(CADENA20, 10));
+		assertFalse(Validator.cumpleLongitudMax(CADENA30, 1));
+		assertFalse(Validator.cumpleLongitudMax(CADENA5, 3));
+		assertFalse(Validator.cumpleLongitudMax(CADENA50, 1));
 	}
 
 	@Test
 	void testCumpleLongitud() {
-
+		assertTrue(Validator.cumpleLongitud(CADENA1, 1, 1));
+		assertTrue(Validator.cumpleLongitud(CADENA20, 20, 30));
+		assertTrue(Validator.cumpleLongitud(CADENA30, 30, 100));
+		assertTrue(Validator.cumpleLongitud(CADENA5, 3, 5));
+		assertTrue(Validator.cumpleLongitud(CADENA50, 30, 100));
+		assertFalse(Validator.cumpleLongitud(CADENA1, 0, 0));
+		assertFalse(Validator.cumpleLongitud(CADENA20, 10, 11));
+		assertFalse(Validator.cumpleLongitud(CADENA30, 50, 100));
+		assertFalse(Validator.cumpleLongitud(CADENA5, 5, 1));
+		assertFalse(Validator.cumpleLongitud(CADENA50, 100, 1));
 	}
 
 	@Test
 	void testValDateMin() {
-
+		assertTrue(Validator.valDateMin(FECHA_OK_1, FECHA_OK));
+		assertTrue(Validator.valDateMin(FECHA_OK_3, FECHA_OK));
+		assertTrue(Validator.valDateMin(FECHA_OK_2, FECHA_OK));
 	}
 
 	@Test
 	void testValDateMax() {
-
+		assertTrue(Validator.valDateMax(FECHA_OK_1, FECHA_OK));
+		assertTrue(Validator.valDateMax(FECHA_OK_2, FECHA_OK));
+		assertTrue(Validator.valDateMax(FECHA_OK_3, FECHA_OK));
 	}
 
 	@Test
 	void testEsFechaValida() {
-
+		assertTrue(Validator.esFechaValida(FECHA_OK));
+		assertTrue(Validator.esFechaValida(FECHA_OK_1));
+		assertTrue(Validator.esFechaValida(FECHA_OK_2));
+		assertTrue(Validator.esFechaValida(FECHA_OK_3));
+		assertFalse(Validator.esFechaValida(FECHA_ERROR));
+		assertFalse(Validator.esFechaValida(FECHA_ERROR_1));
+		assertFalse(Validator.esFechaValida(FECHA_ERROR_2));
+		assertFalse(Validator.esFechaValida(FECHA_ERROR_3));
 	}
 
 	@Test
 	void testEsPasswordValida() {
-
+		assertTrue(Validator.esPasswordValida(CONTRASEÑA_OK));
 	}
 }

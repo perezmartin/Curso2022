@@ -3,6 +3,7 @@ package es.rf.tienda.util;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.regex.Pattern;
 
 /********************************************************************************************
@@ -32,8 +33,8 @@ public class Validator {
 	private final static String DNI_PATTERN = "\\d{2}\\.\\d{3}\\.\\d{3}-[TRWAGMYFPDXBNJZSQVHLCKE]";
 
 	/**
-	 * Permite validar un tel�fono, el cual debe contener de 10 a 20 d�gitos y donde
-	 * los espacios est�n permitidos
+	 * Permite validar un tel�fono, el cual debe contener de 10 a 20 d�gitos y
+	 * donde los espacios est�n permitidos
 	 */
 	private final static String PHONE_PATTERN = "[\\d ]{10,20}";
 
@@ -82,9 +83,9 @@ public class Validator {
 		 * El phone number debe tener un total de entre 10 y 20, contando d�gitos y
 		 * espacios. M�nimo aceptable son 10 d�gitos.
 		 * 
-		 * @param phoneNumber String con el n�mero de telefono de entre 10 y 20 d�gitos.
-		 *                    Puede tener espacios, pero siempre con 10 d�gitos como
-		 *                    m�nimo.
+		 * @param phoneNumber String con el n�mero de telefono de entre 10 y 20
+		 *                    d�gitos. Puede tener espacios, pero siempre con 10
+		 *                    d�gitos como m�nimo.
 		 * 
 		 * @return true, si cumple todas las condiciones
 		 *
@@ -92,8 +93,7 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumplePhoneNumber(String phoneNumber) {
-		return !isVacio(phoneNumber) 				
-				&& phoneNumber.matches(PHONE_PATTERN);
+		return !isVacio(phoneNumber) && phoneNumber.matches(PHONE_PATTERN);
 
 	}
 
@@ -113,8 +113,7 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean isEmailValido(String email) {
-		return !isVacio(email) 
-				&& email.matches(EMAIL_PATTERN); 
+		return !isVacio(email) && email.matches(EMAIL_PATTERN);
 	}
 
 	/*
@@ -134,9 +133,7 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumpleDNI(String dni) {
-		return !isVacio(dni) 
-				&& dni.matches(DNI_PATTERN) 
-				&& cumpleLongitud(dni, LONGITUD_DNI, LONGITUD_DNI);
+		return !isVacio(dni) && dni.matches(DNI_PATTERN) && cumpleLongitud(dni, LONGITUD_DNI, LONGITUD_DNI);
 	}
 
 	/**
@@ -157,12 +154,12 @@ public class Validator {
 	 * 
 	 **************************************************************************************/
 	public static boolean cumpleRango(int valor, int valorMinimo, int valorMaximo) {
-		return (valorMinimo < valor) && (valor > valorMaximo);
+		return (valorMinimo < valor) && (valor < valorMaximo);
 
 	}
 
 	public static boolean cumpleRango(double valor, int valorMinimo, int valorMaximo) {
-		return (valorMinimo < valor) && (valor > valorMaximo);
+		return (valorMinimo < valor) && (valor < valorMaximo);
 
 	}
 
@@ -183,6 +180,7 @@ public class Validator {
 		 * 
 		 **************************************************************************************/
 	public static boolean cumpleLongitudMin(String texto, int longitudMinima) {
+
 		return texto.length() >= longitudMinima;
 
 	}
@@ -214,8 +212,8 @@ public class Validator {
 	 * DESCRIPCI�N:
 	 */
 	/**
-	 * Comprobar que la longitud de un texto se encuentra entre unos valores m�ximos
-	 * y m�nimos
+	 * Comprobar que la longitud de un texto se encuentra entre unos valores
+	 * m�ximos y m�nimos
 	 * 
 	 * @param texto          String con el texto que a validar
 	 * @param longitudMinima (int) M�nima longitud del texto
@@ -239,8 +237,26 @@ public class Validator {
 	 * @return
 	 */
 
-	public static boolean valDateMin(Calendar fecha, Calendar min) {
-		return esFechaValida(fecha.toString()) && esFechaValida(min.toString()) && min.before(fecha);
+	
+	public static boolean valDateMin(String fecha, String min) {
+		
+		if(esFechaValida(fecha) && esFechaValida(min)) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	        
+			try {
+				Date date = new Date(sdf.parse(fecha).getTime());
+				Date dateMin = new Date(sdf.parse(min).getTime());
+				
+				return dateMin.before(date);
+			} catch (ParseException e) {
+				return false;
+			}
+	        
+		}else {
+			return false;
+		}
+		
+		
 	}
 
 	/**
@@ -250,8 +266,25 @@ public class Validator {
 	 * @param max
 	 * @return
 	 */
-	public static boolean valDateMax(Calendar fecha, Calendar max) {
-		return esFechaValida(fecha.toString()) && esFechaValida(max.toString()) && fecha.before(max);
+	public static boolean valDateMax(String fecha, String max) {
+		
+		if(esFechaValida(fecha) && esFechaValida(max)) {
+			SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+	        
+			try {
+				Date date = new Date(sdf.parse(fecha).getTime());
+				Date dateMax = new Date(sdf.parse(max).getTime());
+				
+				return date.before(dateMax);
+				
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return false;
+			}
+	        
+		}else {
+			return false;
+		}		
 
 	}
 
@@ -263,16 +296,20 @@ public class Validator {
 	 * @return
 	 */
 	public static boolean esFechaValida(String fecha) {
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Calendar cal = Calendar.getInstance();
+
+		if (isVacio(fecha)) {
+			return false;
+		}
+
+		SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+		formatoFecha.setLenient(false);
 
 		try {
-			cal.setTime(dateFormat.parse(fecha));
+			formatoFecha.parse(fecha);
+			return true;
 		} catch (ParseException e) {
 			return false;
 		}
-		return !isVacio(fecha) 
-				&& fecha.compareTo(dateFormat.format(cal.getTime().toString())) == 0;
 
 	}
 
