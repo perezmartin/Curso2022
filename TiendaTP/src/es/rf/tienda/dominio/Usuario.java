@@ -9,11 +9,20 @@ public class Usuario {
 	private String user_email;
 	private String user_pass;
 	private int id_tipo;
-	private int user_dni;
+	private String user_dni;
 	private Date user_fecAlta;
+
+	public Usuario() {
+		this.setUser_fecAlta(new Date(System.currentTimeMillis()));
+	}
 
 	public int getId_usuario() {
 		return id_usuario;
+	}
+
+	@Override
+	public String toString() {
+		return id_usuario + " " + user_nombre;
 	}
 
 	public void setId_usuario(int id_usuario) {
@@ -52,11 +61,11 @@ public class Usuario {
 		this.id_tipo = id_tipo;
 	}
 
-	public int getUser_dni() {
+	public String getUser_dni() {
 		return user_dni;
 	}
 
-	public void setUser_dni(int user_dni) {
+	public void setUser_dni(String user_dni) {
 		this.user_dni = user_dni;
 	}
 

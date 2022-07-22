@@ -10,16 +10,14 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import es.rf.tienda.dominio.Categoria;
+import es.rf.tienda.dominio.Usuario;
 
-public class VistaCategoria extends JFrame {
+public class VistaUsuario extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private Categoria categoria;
+	private Usuario usuario;
 
 	public void iniciarVista() {
 		initComponents(); // inicio los componentes
@@ -33,9 +31,9 @@ public class VistaCategoria extends JFrame {
 		setResizable(false);
 		setSize(400, 300);
 
-		if (categoria != null) {
+		if (usuario != null) {
 
-			this.setTitle("Editar Categoria");
+			this.setTitle("Editar Usuario");
 
 			this.botonAceptar.setText("Editar");
 
@@ -44,40 +42,54 @@ public class VistaCategoria extends JFrame {
 			this.botonEliminar.setForeground(Color.WHITE);
 			this.botonEliminar.setBackground(Color.RED);
 
-			this.input_cat_id.setText(categoria.getId_categoria() + "");
-			this.input_cat_nombre.setText(categoria.getCat_nombre());
-			this.textoDescripcion.setText(categoria.getCat_descripcion());
+			this.input_user_id.setText(usuario.getId_usuario() + "");
+			this.input_user_nombre.setText(usuario.getUser_nombre());
+			this.input_user_email.setText(usuario.getUser_email());
+			this.input_tipo_id.setText(usuario.getId_tipo() + "");
+			this.input_user_dni.setText(usuario.getUser_dni());
+			this.input_user_fecAlta.setText(usuario.getUser_fecAlta().toGMTString());
 
 			this.panelBotones.add(botonAceptar);
 			this.panelBotones.add(botonEliminar);
 
 		} else {
 
-			this.setTitle("Agregar Categoria");
+			this.setTitle("Agregar Usuario");
 			this.botonAceptar.setText("Agregar");
 
 			this.panelBotones.add(botonAceptar);
 
 		}
 
-		this.cat_id.setText("ID");
-		this.cat_nombre.setText("NOMBRE");
-		this.cat_descripcion.setText("DESCRIPCION");
+		this.user_id.setText("ID_USUARIO");
+		this.user_nombre.setText("NOMBRE");
+		this.user_email.setText("EMAIL");
+		this.tipo_id.setText("ID_TIPO");
+		this.user_dni.setText("DNI");
+		this.user_fecAlta.setText("FECHA DE ALTA");
 
 		this.botonAceptar.setFont(new Font(Font.DIALOG, Font.BOLD, 20));
 		this.botonAceptar.setBackground(Color.GREEN);
 
-		this.textoDescripcion.setRows(4);
-		JScrollPane input_cat_descripcion = new JScrollPane(textoDescripcion);
-
 		this.panelElementos.setLayout(gridElementos);
 
-		this.panelElementos.add(cat_id);
-		this.panelElementos.add(input_cat_id);
-		this.panelElementos.add(cat_nombre);
-		this.panelElementos.add(input_cat_nombre);
-		this.panelElementos.add(cat_descripcion);
-		this.panelElementos.add(input_cat_descripcion);
+		this.panelElementos.add(user_id);
+		this.panelElementos.add(input_user_id);
+
+		this.panelElementos.add(user_nombre);
+		this.panelElementos.add(input_user_nombre);
+
+		this.panelElementos.add(user_email);
+		this.panelElementos.add(input_user_email);
+
+		this.panelElementos.add(tipo_id);
+		this.panelElementos.add(input_tipo_id);
+
+		this.panelElementos.add(user_dni);
+		this.panelElementos.add(input_user_dni);
+
+		this.panelElementos.add(user_fecAlta);
+		this.panelElementos.add(input_user_fecAlta);
 
 		this.add(panelElementos, BorderLayout.CENTER);
 		this.add(new JPanel(), BorderLayout.WEST);
@@ -86,12 +98,8 @@ public class VistaCategoria extends JFrame {
 
 	}
 
-	public void setCategoria(Categoria c) {
-		this.categoria = c;
-	}
-
-	public void setCategoria(int id, String nombre, String des) {
-		this.categoria = new Categoria(id, nombre, des);
+	public void setUsuario(Usuario user) {
+		this.usuario = user;
 	}
 
 	public void clickEnBotonAceptar(ActionListener al) {
@@ -107,12 +115,19 @@ public class VistaCategoria extends JFrame {
 	private JButton botonAceptar = new JButton();
 	private JButton botonEliminar = new JButton();
 
-	private JLabel cat_id = new JLabel();
-	private JLabel cat_nombre = new JLabel();
-	private JLabel cat_descripcion = new JLabel();
-	private JTextField input_cat_id = new JTextField();
-	private JTextField input_cat_nombre = new JTextField();
-	private JTextArea textoDescripcion = new JTextArea();
+	private JLabel user_id = new JLabel();
+	private JLabel user_nombre = new JLabel();
+	private JLabel user_email = new JLabel();
+	private JLabel tipo_id = new JLabel();
+	private JLabel user_dni = new JLabel();
+	private JLabel user_fecAlta = new JLabel();
+
+	private JTextField input_user_id = new JTextField();
+	private JTextField input_user_nombre = new JTextField();
+	private JTextField input_user_email = new JTextField();
+	private JTextField input_tipo_id = new JTextField();
+	private JTextField input_user_dni = new JTextField();
+	private JTextField input_user_fecAlta = new JTextField();
 
 	private JPanel panelBotones = new JPanel();
 	private JPanel panelElementos = new JPanel();
