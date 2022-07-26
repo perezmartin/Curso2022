@@ -19,6 +19,10 @@ public class VistaListadoUsuariosTest {
 		usr2.setUser_nombre("Maria");
 		usr3.setUser_nombre("Lucas");
 		
+		usr1.setUser_email("Jorge@asd.com");
+		usr2.setUser_email("Maria@asd.com");
+		usr3.setUser_email("Lucas@asd.com");
+		
 		ArrayList<Usuario> data= new ArrayList<>();
 		
 		for (int i = 1; i < 5; i++) {

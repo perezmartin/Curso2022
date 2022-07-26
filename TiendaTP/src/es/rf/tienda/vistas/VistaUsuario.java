@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -96,6 +98,15 @@ public class VistaUsuario extends JFrame {
 		this.add(new JPanel(), BorderLayout.EAST);
 		this.add(panelBotones, BorderLayout.SOUTH);
 
+	}
+
+	public void volverALaVistaAnterior(JFrame vista) {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				vista.setVisible(true);
+			}
+		});
 	}
 
 	public void setUsuario(Usuario user) {

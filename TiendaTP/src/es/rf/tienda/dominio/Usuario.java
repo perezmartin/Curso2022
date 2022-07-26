@@ -12,17 +12,16 @@ public class Usuario {
 	private String user_dni;
 	private Date user_fecAlta;
 
+	private Date user_fecConfirmacion;
+	private Direccion user_pago;
+	private Direccion user_envio;
+
 	public Usuario() {
 		this.setUser_fecAlta(new Date(System.currentTimeMillis()));
 	}
 
 	public int getId_usuario() {
 		return id_usuario;
-	}
-
-	@Override
-	public String toString() {
-		return id_usuario + " " + user_nombre;
 	}
 
 	public void setId_usuario(int id_usuario) {
@@ -101,8 +100,9 @@ public class Usuario {
 		this.user_envio = user_envio;
 	}
 
-	private Date user_fecConfirmacion;
-	private Direccion user_pago;
-	private Direccion user_envio;
+	@Override
+	public String toString() {
+		return id_usuario + " || " + user_nombre + " || " + user_email;
+	}
 
 }

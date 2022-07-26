@@ -116,7 +116,7 @@ public class Categoria {
 
 	@Override
 	public String toString() {
-		return id_categoria + " " + cat_nombre;
+		return id_categoria + " || " + cat_nombre;
 	}
 
 }

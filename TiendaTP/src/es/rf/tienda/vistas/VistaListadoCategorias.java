@@ -4,7 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -32,6 +33,15 @@ public class VistaListadoCategorias extends JFrame {
 		setVisible(true); // hago visible la VistaSwing
 	}
 
+	public void volverALaVistaAnterior(JFrame vista) {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				vista.setVisible(true);
+			}
+		});
+	}
+
 	public void agregarListado(ArrayList<Categoria> c) {
 		DefaultListModel<Categoria> lista = new DefaultListModel<Categoria>();
 		this.listaCategorias.setModel(lista);
@@ -44,10 +54,15 @@ public class VistaListadoCategorias extends JFrame {
 
 	private void initComponents() {
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(400, 300);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
+
+		this.botonAgregar.setText("Agregar Nueva Categoria");
+		this.botonEliminarSeleccionados.setText("Eliminar Seleccionados");
+
+		this.label.setText("ID || NOMBRE");
 
 		panelTop.add(label);
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -84,10 +99,10 @@ public class VistaListadoCategorias extends JFrame {
 
 	private JScrollPane scrollPanel = new JScrollPane(panelCentro);
 
-	private JButton botonAgregar = new JButton("Agregar Nueva Categoria");
-	private JButton botonEliminarSeleccionados = new JButton("Eliminar Seleccionados");
+	private JButton botonAgregar = new JButton();
+	private JButton botonEliminarSeleccionados = new JButton();
 
-	private JLabel label = new JLabel("ID + NOMBRE");
+	private JLabel label = new JLabel();
 
 	private JList<Categoria> listaCategorias = new JList<Categoria>();
 

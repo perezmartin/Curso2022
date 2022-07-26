@@ -5,6 +5,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -100,6 +102,15 @@ public class VistaCategoria extends JFrame {
 
 	public void clickEnBotonEliminar(ActionListener al) {
 		this.botonAceptar.addActionListener(al);
+	}
+
+	public void volverALaVistaAnterior(JFrame vista) {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				vista.setVisible(true);
+			}
+		});
 	}
 
 	// declaracion de variables

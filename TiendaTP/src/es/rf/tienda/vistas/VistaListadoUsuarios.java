@@ -4,7 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseListener;
-
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -32,6 +33,15 @@ public class VistaListadoUsuarios extends JFrame {
 		setVisible(true); // hago visible la VistaSwing
 	}
 
+	public void volverALaVistaAnterior(JFrame vista) {
+		this.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				vista.setVisible(true);
+			}
+		});
+	}
+
 	public void agregarListado(ArrayList<Usuario> users) {
 		DefaultListModel<Usuario> lista = new DefaultListModel<Usuario>();
 		this.listaUsuarios.setModel(lista);
@@ -44,7 +54,7 @@ public class VistaListadoUsuarios extends JFrame {
 
 	private void initComponents() {
 
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.setSize(400, 300);
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -52,7 +62,7 @@ public class VistaListadoUsuarios extends JFrame {
 		this.botonAgregar.setText("Agregar Nueva Categoria");
 		this.botonEliminarSeleccionados.setText("Eliminar Seleccionados");
 
-		this.label.setText("ID + NOMBRE");
+		this.label.setText("ID || NOMBRE || EMAIL");
 
 		panelTop.add(label);
 		label.setAlignmentX(Component.CENTER_ALIGNMENT);
